@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import Quote from './Components/Quote';
+import Button from './Components/Button';
 import './App.css';
 import { useState } from 'react';
 
@@ -18,7 +19,7 @@ const App = () => {
     setError(null);
 
     try {
-      const apiUrl = `https://quote-api-app.herokuapp.com/api/quotes/${category}/random`; // Using Quotable API for category support;
+      const apiUrl = `https://api.quotable.io/random`; // Using Quotable API for category support;
       const response = await fetch(apiUrl);
       const data = await response.json();
       setQuote ({ text: data.content, author: data.author })
@@ -46,6 +47,7 @@ const App = () => {
         <Quote quote={quote} />
         </>
       )}
+      <Button fetchQuote={fetchQuote} />
     </div>
   )
 } 
