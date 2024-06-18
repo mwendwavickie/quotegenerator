@@ -1,6 +1,6 @@
 import React from "react";
 
-const Quote = () => {
+const Quote = ({ quote }) => {
     return (
         <div className="quote-container">
             <p className="quote-text">{quote.text} </p>
