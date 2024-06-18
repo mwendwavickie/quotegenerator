@@ -14,7 +14,7 @@ const Button = ({ fetchQuote }) => {
     };
     return (
         <div className="button-container">
-            <button onClick={fetchQuote}>New QUote</button>
+            <button onClick={fetchQuote}>New Quote</button>
             <button onClick={shareQuote}>
             <i className="fas fa-share-alt"></i>Share Quote
             </button>
