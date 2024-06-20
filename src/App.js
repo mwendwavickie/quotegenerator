@@ -1,12 +1,16 @@
 import React, { useEffect } from 'react';
 import Quote from './Components/Quote';
 import Button from './Components/Button';
+import Header from './Components/Header';
+import Filter from './Components/Filter';
 import './App.css';
 import { useState } from 'react';
 
 const App = () => {
   const [ quote, setQuote ] = useState({text: '', author: ''});
   const [ category, setCategory ] = useState('inspiration');
+  const [ author, setAuthor ] = useState('');
+  const [ keyword, setKeyword ] = useState('');
   const [ isLoading, setIsLoading ] = useState(false);
   const [ error, setError ] = useState(null);
 
@@ -40,6 +44,12 @@ const App = () => {
 
   return (
     <div className='App'>
+      <Header />
+      <Filter 
+        setCategory={setCategory} 
+        setAuthor={setAuthor} 
+        setKeyword={setKeyword} 
+      />
       {isLoading && <p>Fetching quote...</p>}
       {error && <p>Error: {error}</p>}
       {quote.text && (
