@@ -8,25 +8,23 @@ import { useState } from 'react';
 
 const App = () => {
   const [ quote, setQuote ] = useState({text: '', author: ''});
-  const [ category, setCategory ] = useState('inspiration');
-  const [ author, setAuthor ] = useState('');
-  const [ keyword, setKeyword ] = useState('');
+  const [ category, setCategory ] = useState('inspirational');
+  const [ tag, setTag ] = useState('');
   const [ isLoading, setIsLoading ] = useState(false);
   const [ error, setError ] = useState(null);
 
   useEffect(() => {
     fetchQuote ();
-  },[category]);
+  },[tag]);
 
   const fetchQuote = async () => {
     setIsLoading(true);
     setError(null);
 
     try {
-      const apiUrl = `https://api.quotable.io/random`; // Using Quotable API for category support;
-      const response = await fetch(apiUrl);
+      const response = await fetch(`https://api.quotable.io/random?tags=${tag}`);
       const data = await response.json();
-      setQuote ({ text: data.content, author: data.author })
+      setQuote(data);
 
     }catch(error){
       setError('Error fetching the quote. Please try again.');
@@ -44,19 +42,20 @@ const App = () => {
 
   return (
     <div className='App'>
-      <Header />
-      <Filter 
-        setCategory={setCategory} 
-        setAuthor={setAuthor} 
-        setKeyword={setKeyword} 
-      />
-      {isLoading && <p>Fetching quote...</p>}
-      {error && <p>Error: {error}</p>}
-      {quote.text && (
-        <>
+      <header className="App-header" >
+      <img src={`${process.env.PUBLIC_URL}/left-quote-quote-white-icon-png.jpg`} alt="Logo" className="App-logo" />
+      <h1>Quote Generator</h1>
+      </header>
+
+      <Filter setTag={setTag} />
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : error ? (
+        <p className="error">{error}</p>
+      ) : (
         <Quote quote={quote} />
-        </>
       )}
+      
       <Button fetchQuote={fetchQuote} />
     </div>
   )

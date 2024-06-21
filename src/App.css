@@ -8,6 +8,22 @@
   padding: 20px;
 }
 
+.App-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.App-logo {
+  width: 100px; /* Adjust size as needed */
+  height: auto;
+  margin-bottom: 10px;
+  display: flex;
+  background-color: black;
+  color: black;
+}
+
 .quote-container {
   margin: 20px auto;
   padding: 20px;
